@@ -1,0 +1,36 @@
+#N canvas 544 54 457 541 10;
+#X obj 134 466 dac~;
+#X obj 53 299 -~ 0.5;
+#X obj 194 269 hsl 128 15 20 20000 1 0 empty empty Frequency -2 -8
+0 10 -262144 -1 -1 0 1;
+#X obj 243 310 hsl 128 15 0.1 20 1 0 empty empty Q -2 -8 0 10 -262144
+-1 -1 0 1;
+#X floatatom 199 292 5 0 0 0 - - -;
+#X floatatom 249 332 5 0 0 0 - - -;
+#X obj 53 275 phasor~ 150;
+#X obj 53 329 *~ 0.1;
+#X text 33 78 Inlet 0 - (Signal) In;
+#X text 32 128 Arguments: Frequency \, Resonance \, Type;
+#X text 32 143 Defaults: 300Hz \, 0.707 \, lowpass;
+#X text 12 173 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X obj 142 422 hsd_svf~ 500 2;
+#X text 16 13 This is a State-Variable-Filter \, based on the book
+DAFX by Zoelzer. It calculates simultaneously lowpass \, highpass and
+bandpass output with the same values for Cutoff Frequency and Resoance
+;
+#X obj 341 498 hsd_library-meta;
+#X text 28 196 Be aware that this state variable filter has a stability
+criteria "F < 2- Q"! So the parameter ranges are clipped in relation
+to each other.;
+#X text 32 93 Inlet 1 - (Float) Cutoff Frequency F: 20Hz - 20kHz;
+#X text 32 108 Inlet 2 - (Float) Resonance Q: 0.1 - 20;
+#X connect 1 0 7 0;
+#X connect 2 0 4 0;
+#X connect 2 0 12 1;
+#X connect 3 0 5 0;
+#X connect 3 0 12 2;
+#X connect 6 0 1 0;
+#X connect 7 0 12 0;
+#X connect 12 0 0 0;
+#X connect 12 0 0 1;

@@ -1,0 +1,46 @@
+#N canvas 114 58 616 452 10;
+#X obj 121 404 dac~;
+#X obj 40 237 -~ 0.5;
+#X obj 129 360 hsd_biquad~ 500 2 lowpass;
+#X obj 181 207 hsl 128 15 20 20000 1 0 empty empty Frequency -2 -8
+0 10 -262144 -1 -1 0 1;
+#X obj 230 248 hsl 128 15 0.1 20 1 0 empty empty Q -2 -8 0 10 -262144
+-1 -1 0 1;
+#X floatatom 186 230 5 0 0 0 - - -;
+#X floatatom 236 270 5 0 0 0 - - -;
+#X obj 40 213 phasor~ 150;
+#X obj 40 267 *~ 0.1;
+#X obj 276 324 symbol;
+#X msg 463 196 lowpass;
+#X msg 463 220 highpass;
+#X msg 463 246 bandpass;
+#X msg 463 293 allpass;
+#X msg 463 270 bandreject;
+#X text 462 168 click to switch;
+#X text 32 35 Inlet 0 - (Signal) In;
+#X text 32 50 Inlet 1 - (Float) Cutoff Frequency: 20Hz - 20kHz;
+#X text 32 65 Inlet 2 - (Float) Resonance: Q 0.1 - 20comment;
+#X text 32 80 Inlet 3 - (Symbol) Type: lowpass \, highpass \, bandpass
+\, bandreject \, allpass;
+#X text 32 120 Arguments: Frequency \, Resonance \, Type;
+#X text 32 135 Defaults: 300Hz \, 0.707 \, lowpass;
+#X text 12 165 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X text 12 7 This is a common standard biquad filter (DF2) with internal
+coefficient calculation \, based on the book DAFX by Zoelzer.;
+#X obj 499 392 hsd_library-meta;
+#X connect 1 0 8 0;
+#X connect 2 0 0 0;
+#X connect 2 0 0 1;
+#X connect 3 0 2 1;
+#X connect 3 0 5 0;
+#X connect 4 0 2 2;
+#X connect 4 0 6 0;
+#X connect 7 0 1 0;
+#X connect 8 0 2 0;
+#X connect 9 0 2 3;
+#X connect 10 0 9 0;
+#X connect 11 0 9 0;
+#X connect 12 0 9 0;
+#X connect 13 0 9 0;
+#X connect 14 0 9 0;

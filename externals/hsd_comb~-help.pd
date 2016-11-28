@@ -1,0 +1,43 @@
+#N canvas 445 151 915 592 10;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array impulse_response2 44100 float 0;
+#X coords 0 1 44099 -1 500 140 1 0 0;
+#X restore 340 366 graph;
+#X msg 425 4 bang;
+#X floatatom 560 130 5 0 0 0 - - -;
+#X text 468 3 start the impulse and the recording;
+#X text 600 130 set the delay in ms;
+#X text 19 148 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X text 38 36 Inlet 1 - (Signal) Input Signal;
+#X text 38 54 Inlet 2 - (Float) Delay time in ms. Default 10ms;
+#X text 14 -15 hsd_comb~ is basically a delay line with feedback \,
+resulting in a comb filter. It is often used in reverberator-algorithms
+\, like the Schroeder-Reverberator;
+#X text 37 103 Outlet - (Signal) Comb-Filtered Output Signal;
+#X text 38 73 Inlet 3 - (Float) Feedback Gain. Range from 0 to 1 Default
+0.1;
+#X text 34 125 Arguments: Delay time in milliseconds \, Feedback Gain
+;
+#X obj 515 178 hsd_comb~ 10 0.6;
+#X floatatom 608 151 5 0 0 0 - - -;
+#X text 649 150 set the feedback gain;
+#X obj 474 103 hsd_impulse~ 100;
+#X text 545 245 Write the impulse and the impulse resonse of the comb
+filter to the array;
+#X text 476 67 Send out an impulse of 100 samples. Smaller impulses
+might not be displayed right;
+#X text 531 320 Array with a size of 44100 \, means 1s of audio with
+a sample rate of 44.1kHz;
+#X text 16 215 The output is calculated by the difference equation:
+;
+#X text 50 240 y(n) = x(n-D) + g * y(n-D);
+#X obj 475 276 tabwrite~ impulse_response2;
+#X obj 792 543 hsd_library-meta;
+#X connect 1 0 15 0;
+#X connect 1 0 21 0;
+#X connect 2 0 12 1;
+#X connect 12 0 21 0;
+#X connect 13 0 12 2;
+#X connect 15 0 12 0;
+#X connect 15 0 21 0;

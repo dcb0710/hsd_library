@@ -1,0 +1,61 @@
+#N canvas 271 293 968 726 10;
+#X obj 646 323 *~ 0.5;
+#X text 24 309 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X text 43 180 Inlet 1 - (Signal) Input Signal;
+#X text 17 -11 This is a vibrato / flanger effect. By modulating the
+length of a delay \, the pitch of the sound goes up and down when the
+output is read faster or slower from the delay line \, because of the
+doppler effect. It is basicylly the same as playing a tape recorder
+at variable speed.;
+#X text 17 61 The delay is modulated by a sinewave-LFO between zero
+and the applied vibrato-depth.;
+#X text 16 90 If the vibrato signal is mixed with the dry signal \,
+the flanging effect occurs. To increase the drama of the flanging-effect
+\, you can set a feedback amount from the output of the delay-line
+to the input. Applying the feedback to a plain vibrato \, main sound
+interesting \, but quite unuseful.;
+#X text 43 214 Inlet 2 - (Float) Frequency of the LFO. Default 1 Hz
+;
+#X text 43 230 Inlet 2 - (Float) Feedback amount \, between -0.99 and
++0.99. Default 0;
+#X text 45 261 Outlet - (Signal) Output Vibrato Signal;
+#X text 44 283 Arguments: As inlets;
+#X obj 578 -9 phasor~ 200;
+#X obj 578 41 *~ 2;
+#X obj 578 16 -~ 0.5;
+#X obj 646 353 dac~;
+#X obj 510 69 vsl 15 128 0 1 0 0 empty empty dry_level 0 -9 0 10 -262144
+-1 -1 0 1;
+#X obj 646 273 hsd_vibrato~ 5 1 0;
+#X obj 540 270 *~;
+#X floatatom 510 213 5 0 0 0 - - -;
+#X obj 680 61 vsl 15 128 0 10 0 0 empty empty depth 0 -9 0 10 -262144
+-1 -1 3800 1;
+#X floatatom 680 214 5 0 0 0 - - -;
+#X text 43 198 Inlet 2 - (Float) Depth time in ms \, max 20ms. Default
+0;
+#X obj 716 82 vsl 15 128 0 10 0 0 empty empty lfo_frequency 0 -9 0
+10 -262144 -1 -1 4700 1;
+#X floatatom 716 232 5 0 0 0 - - -;
+#X obj 751 102 vsl 15 128 0 0.99 0 0 empty empty feedback 0 -9 0 10
+-262144 -1 -1 0 1;
+#X floatatom 751 247 5 0 0 0 - - -;
+#X text 661 -9 saw oscillator;
+#X text 385 437;
+#X connect 0 0 13 0;
+#X connect 0 0 13 1;
+#X connect 10 0 12 0;
+#X connect 11 0 15 0;
+#X connect 11 0 16 0;
+#X connect 12 0 11 0;
+#X connect 14 0 17 0;
+#X connect 15 0 0 0;
+#X connect 16 0 0 0;
+#X connect 17 0 16 1;
+#X connect 18 0 19 0;
+#X connect 19 0 15 1;
+#X connect 21 0 22 0;
+#X connect 22 0 15 2;
+#X connect 23 0 24 0;
+#X connect 24 0 15 3;

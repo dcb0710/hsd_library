@@ -1,0 +1,58 @@
+#N canvas 455 53 638 583 10;
+#X obj 184 309 hsl 128 15 20 20000 1 0 empty empty empty -2 -8 0 10
+-262144 -1 -1 0 1;
+#X obj 296 328 hsl 128 15 0.1 20 1 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 0 1;
+#X floatatom 181 352 5 0 0 0 - - -;
+#X floatatom 293 359 5 0 0 0 - - -;
+#X obj 406 400 symbol;
+#X msg 462 255 lowpass;
+#X msg 462 279 highpass;
+#X msg 462 305 bandpass;
+#X msg 462 352 allpass;
+#X msg 462 329 bandreject;
+#X text 461 227 click to switch;
+#X text 32 233 Arguments: Frequency \, Resonance \, Type;
+#X text 32 248 Defaults: 300Hz \, 0.707 \, lowpass;
+#X text 12 278 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X floatatom 180 464 5 0 0 0 - - -;
+#X floatatom 237 464 5 0 0 0 - - -;
+#X floatatom 294 465 5 0 0 0 - - -;
+#X floatatom 348 464 5 0 0 0 - - -;
+#X floatatom 407 464 5 0 0 0 - - -;
+#X text 33 84 Inlet 0 - (Float) Cutoff Frequency: 20Hz - 20kHz;
+#X text 33 99 Inlet 1 - (Float) Resonance: Q 0.1 - 20comment;
+#X text 33 114 Inlet 2 - (Symbol) Type: lowpass \, highpass \, bandpass
+\, bandreject \, allpass;
+#X text 34 146 Outlet 0 - b0;
+#X text 34 163 Outlet 1 - b1;
+#X text 33 180 Outlet 2 - b2;
+#X text 33 197 Outlet 3 - a1;
+#X text 33 213 Outlet 4 - a2;
+#X text 179 482 b0;
+#X text 236 482 b1;
+#X text 293 482 b2;
+#X text 350 482 a1;
+#X text 407 482 a2;
+#X obj 181 436 hsd_biquad_coefficients 500 2 lowpass;
+#X text 15 7 This is a modified version of the hsd_biquad-object. It
+lacks of any signal processing \, it calculates the biquad-coefficients
+and sends them as float-values to the outlets. It is well suited to
+be combined with th hsd_biquad_engine~ object.;
+#X obj 523 548 hsd_library-meta;
+#X connect 0 0 2 0;
+#X connect 1 0 3 0;
+#X connect 2 0 32 0;
+#X connect 3 0 32 1;
+#X connect 4 0 32 2;
+#X connect 5 0 4 0;
+#X connect 6 0 4 0;
+#X connect 7 0 4 0;
+#X connect 8 0 4 0;
+#X connect 9 0 4 0;
+#X connect 32 0 14 0;
+#X connect 32 1 15 0;
+#X connect 32 2 16 0;
+#X connect 32 3 17 0;
+#X connect 32 4 18 0;

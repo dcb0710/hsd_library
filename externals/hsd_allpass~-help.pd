@@ -1,0 +1,41 @@
+#N canvas 572 178 965 587 10;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array impulse_response 44100 float 0;
+#X coords 0 1 44099 -1 500 140 1 0 0;
+#X restore 340 366 graph;
+#X obj 474 276 tabwrite~ impulse_response;
+#X msg 425 4 bang;
+#X text 468 3 start the impulse and the recording;
+#X text 600 130 set the delay in ms;
+#X text 17 137 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X text 36 25 Inlet 1 - (Signal) Input Signal;
+#X text 36 43 Inlet 2 - (Float) Delay time in ms. Default 10ms;
+#X text 649 150 set the feedback gain;
+#X obj 474 103 hsd_impulse~ 100;
+#X text 545 245 Write the impulse and the impulse resonse of the comb
+filter to the array;
+#X text 476 67 Send out an impulse of 100 samples. Smaller impulses
+might not be displayed right;
+#X text 531 320 Array with a size of 44100 \, means 1s of audio with
+a sample rate of 44.1kHz;
+#X text 11 -26 hsd_allpass~ is an allpass filter realised with a delay
+line. The result is a "delaying allpass" which is used in reverberator-algorithms
+;
+#X text 36 62 Inlet 3 - (Float) Feedback & Feed Forward Gain. Range
+from 0 to 1 Default 0.1;
+#X text 35 92 Outlet - (Signal) Allpass-Filtered Output Signal;
+#X text 32 114 Arguments: Delay time in milliseconds \, Gain;
+#X text 15 183 The output is calculated by the difference equation:
+;
+#X text 49 208 y(n) = -g * x(n) + x(n-D) + g * y(n-D);
+#X obj 521 178 hsd_allpass~;
+#X floatatom 554 132 5 0 0 0 - - -;
+#X floatatom 590 153 5 0 0 0 - - -;
+#X obj 850 530 hsd_library-meta;
+#X connect 2 0 1 0;
+#X connect 2 0 9 0;
+#X connect 9 0 19 0;
+#X connect 19 0 1 0;
+#X connect 20 0 19 1;
+#X connect 21 0 19 2;

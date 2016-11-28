@@ -1,0 +1,79 @@
+#N canvas 542 42 749 716 10;
+#X obj 109 669 dac~;
+#X obj 39 357 -~ 0.5;
+#X obj 133 315 hsl 128 15 20 20000 1 0 empty empty Frequency -2 -8
+0 10 -262144 -1 -1 0 1;
+#X obj 242 349 hsl 128 15 0.1 20 1 0 empty empty Q -2 -8 0 10 -262144
+-1 -1 0 1;
+#X floatatom 130 382 5 0 0 0 - - -;
+#X floatatom 239 381 5 0 0 0 - - -;
+#X obj 39 333 phasor~ 150;
+#X obj 39 387 *~ 0.1;
+#X obj 349 388 symbol;
+#X msg 444 262 lowpass;
+#X msg 444 286 highpass;
+#X msg 444 312 bandpass;
+#X msg 444 359 allpass;
+#X msg 444 336 bandreject;
+#X text 443 234 click to switch;
+#X text 34 125 Inlet 0 - (Signal) In;
+#X text 12 197 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X obj 130 415 hsd_biquad_coefficients 500 2 lowpass;
+#X obj 109 594 hsd_biquad_engine~;
+#X obj 273 591 hsd_biquad_engine~ 0.00105332 0.00210663 0.00105332
+-1.96361 0.967825;
+#X floatatom 130 452 5 0 0 0 - - -;
+#X floatatom 184 453 5 0 0 0 - - -;
+#X floatatom 239 453 5 0 0 0 - - -;
+#X floatatom 294 453 5 0 0 0 - - -;
+#X floatatom 349 453 5 0 0 0 - - -;
+#X text 144 467 b0;
+#X text 199 468 b1;
+#X text 252 467 b2;
+#X text 307 467 a1;
+#X text 363 468 a2;
+#X text 67 245 Use the hsd_biquad_coefficients object to get the coefficients.
+It order of outlets matches exactly the order of inlets of _engine~
+for the coefficients;
+#X text 34 140 Inlet 1 to 5 - Biquad Coefficients b0 \, b1 \, b2 \,
+a1 \, a2;
+#X text 34 156 Arguments: b0 \, b1 \, b2 \, a1 \, a2;
+#X text 34 171 Defaults: all coeffients = 0;
+#X text 271 531 Or create with coefficients directly as arguments.
+Coefficients calculated with the "biquad calculator" from earlevel.com
+for settings "500Hz \, Q=2 \, Lowpass \, Samplerate=48kHz";
+#X text 10 14 This is a modified verision of the hsd_biquad object.
+The calculation of coefficients is omitted \, instead \, the coefficients
+are passed by creation arguments or through the inlets. The advantage
+is a streamlined object and it´s possible to use own coefficients
+(e.g. from WinFilter for static filters) or calculation methods. The
+Filter (Biquad DF2) will be calculated with an coefficients the object
+receives. NO SANITY CHECKING.;
+#X obj 625 678 hsd_library-meta;
+#X connect 1 0 7 0;
+#X connect 2 0 4 0;
+#X connect 3 0 5 0;
+#X connect 4 0 17 0;
+#X connect 5 0 17 1;
+#X connect 6 0 1 0;
+#X connect 7 0 18 0;
+#X connect 7 0 19 0;
+#X connect 8 0 17 2;
+#X connect 9 0 8 0;
+#X connect 10 0 8 0;
+#X connect 11 0 8 0;
+#X connect 12 0 8 0;
+#X connect 13 0 8 0;
+#X connect 17 0 20 0;
+#X connect 17 1 21 0;
+#X connect 17 2 22 0;
+#X connect 17 3 23 0;
+#X connect 17 4 24 0;
+#X connect 18 0 0 0;
+#X connect 19 0 0 1;
+#X connect 20 0 18 1;
+#X connect 21 0 18 2;
+#X connect 22 0 18 3;
+#X connect 23 0 18 4;
+#X connect 24 0 18 5;

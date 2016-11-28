@@ -1,0 +1,76 @@
+#N canvas 315 41 909 637 10;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array output_l 1000 float 0;
+#X coords 0 1 999 -1 200 140 1 0 0;
+#X restore 408 297 graph;
+#X text 15 305 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X obj 611 228 dac~;
+#X obj 565 6 *~ 0.5;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array output_r 1000 float 0;
+#X coords 0 1 999 -1 200 140 1 0 0;
+#X restore 670 300 graph;
+#X obj 489 131 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X floatatom 691 48 5 0 0 0 - - -;
+#X floatatom 657 15 5 0 0 0 - - -;
+#X floatatom 717 75 5 0 0 0 - - -;
+#X obj 489 154 metro 50;
+#X floatatom 741 102 5 0 0 0 - - -;
+#X obj 489 109 loadbang;
+#X obj 701 11 hsl 128 15 0 20 0 0 empty empty delay_ms_r -2 -8 0 10
+-262144 -1 -1 0 1;
+#X obj 660 -25 hsl 128 15 0 20 0 0 empty empty delay_ms_l -2 -8 0 10
+-262144 -1 -1 0 1;
+#X obj 737 43 hsl 128 15 0 10 0 0 empty empty lfo_frequency -2 -8 0
+10 -262144 -1 -1 0 1;
+#X obj 773 77 hsl 128 15 0 100 0 0 empty empty dry_wet -2 -8 0 10 -262144
+-1 -1 0 1;
+#X obj 660 230 tabwrite~ output_r;
+#X obj 489 227 tabwrite~ output_l;
+#X obj 565 -25 osc~ 440;
+#X text 538 489 NOTE: A certain dry_wet mix can apply amplitude modulation
+to a sine wave. This is normal \, due to mixing phase shifted sine
+waves together;
+#X text 11 -26 This is a simple chorus effect. It has a stereo input
+and delays each signal with a LFO-modulated delay-time. The LFO is
+a sine wave with the same frequency for both channels \, but with a
+90° phase shift for the right channel. This results in a stereo "chasing"
+effect.;
+#X text 36 48 Inlet 1 - (Signal) Input Signal Left;
+#X text 36 64 Inlet 2 - (Signal) Input Signal Right;
+#X text 39 281 Arguments: Same order as float inlets;
+#X obj 618 127 hsd_chorus~ 3 5 1 100;
+#X text 36 83 Inlet 3 - (Float) Delay time for the left channel in
+ms. Default 10ms. Max value 40ms.;
+#X text 36 115 Inlet 4 - (Float) Delay time for the right channel in
+ms. Default 10ms. Max Value 40ms.;
+#X text 35 146 Inlet 5 - (Float) Frequency for the LFO. Default 1Hz.
+No Max Value \, but useful only up to 20Hz.;
+#X text 35 178 Inlet 6 - (Float) Dry/ Wet mix. Value from 0 to 100
+\, mixing from only dry (0) to wet (100). When set to 50 \, original
+and effectesd signal are equally mixed. This is the most recommended
+setting for chorus effect.;
+#X text 36 242 Outlet 1 - (Signal) Output Signal Left;
+#X text 41 260 Outlet 2 - (Signal) Output Signal Right;
+#X obj 788 569 hsd_library-meta;
+#X connect 3 0 24 0;
+#X connect 3 0 24 1;
+#X connect 5 0 9 0;
+#X connect 6 0 24 3;
+#X connect 7 0 24 2;
+#X connect 8 0 24 4;
+#X connect 9 0 16 0;
+#X connect 9 0 17 0;
+#X connect 10 0 24 5;
+#X connect 11 0 5 0;
+#X connect 12 0 6 0;
+#X connect 13 0 7 0;
+#X connect 14 0 8 0;
+#X connect 15 0 10 0;
+#X connect 18 0 3 0;
+#X connect 24 0 2 0;
+#X connect 24 0 17 0;
+#X connect 24 1 2 1;
+#X connect 24 1 16 0;

@@ -1,0 +1,48 @@
+#N canvas 339 278 912 608 10;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array impulse_response 44100 float 0;
+#X coords 0 1 44099 -1 500 140 1 0 0;
+#X restore 340 366 graph;
+#X obj 474 276 tabwrite~ impulse_response;
+#X msg 425 4 bang;
+#X floatatom 560 130 5 0 0 0 - - -;
+#X text 468 3 start the impulse and the recording;
+#X text 600 130 set the delay in ms;
+#X text 18 236 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X text 38 97 Inlet 1 - (Signal) Input Signal;
+#X text 38 115 Inlet 2 - (Float) Delay time in ms. Default 10ms;
+#X text 37 184 Outlet - (Signal) Comb-Filtered Output Signal;
+#X text 38 134 Inlet 3 - (Float) Feedback Gain. Range from 0 to 1 Default
+0.1;
+#X floatatom 608 151 5 0 0 0 - - -;
+#X text 649 150 set the feedback gain;
+#X obj 474 103 hsd_impulse~ 100;
+#X text 545 245 Write the impulse and the impulse resonse of the comb
+filter to the array;
+#X text 476 67 Send out an impulse of 100 samples. Smaller impulses
+might not be displayed right;
+#X text 531 320 Array with a size of 44100 \, means 1s of audio with
+a sample rate of 44.1kHz;
+#X obj 515 201 hsd_comblp~ 10 0.6;
+#X text 36 163 Inlet 3 - (Float) Lowpass Gain. Range from 0 to 1 Default
+0;
+#X text 34 206 Arguments: Delay time in milliseconds \, Feedback Gain
+\, Lowpass Gain;
+#X text 14 54 Due to stabilty reasons \, the gain coefficients may
+not exceed 1 when added;
+#X text 14 -15 hsd_comblp~ is a modified comb filter. it has a first
+order lowpass filter in its feedback path. The purpose of this is to
+model the fast decaying energy of high frequencies in room reverbs.
+The gain coefficient of the lowpass is set manually.;
+#X floatatom 621 174 5 0 0 0 - - -;
+#X text 662 173 set the lowpass gain;
+#X obj 788 559 hsd_library-meta;
+#X connect 2 0 1 0;
+#X connect 2 0 13 0;
+#X connect 3 0 17 1;
+#X connect 11 0 17 2;
+#X connect 13 0 1 0;
+#X connect 13 0 17 0;
+#X connect 17 0 1 0;
+#X connect 22 0 17 3;

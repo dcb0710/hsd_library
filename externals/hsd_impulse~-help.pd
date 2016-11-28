@@ -1,0 +1,27 @@
+#N canvas 684 194 630 465 10;
+#X text 17 156 Author: David Bau \, Unversity of Applied Siences Duesseldorf
+;
+#X text 37 110 Arguments: Impulse length in samples;
+#X text 37 131 Defaults: Length = 0;
+#X obj 122 372 tabwrite~ impulse;
+#X obj 61 238 bng 15 250 50 0 empty empty Click_bang_to_generate_impulse
+17 7 0 10 -262144 -1 -1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array impulse 30 float 2;
+#X coords 0 1 30 -1 200 140 1;
+#X restore 355 263 graph;
+#X obj 123 321 hsd_impulse~ 10;
+#X obj 122 343 *~ 0.9;
+#X floatatom 210 282 5 0 0 2 Set_impulse_length - -;
+#X text 36 72 Inlet 0 - A Bang starts the impulse;
+#X text 36 89 Inlet 1 - (Float) Set the impulse length in samples;
+#X text 10 8 This When a bang is sent to the object \, it will send
+out n samples with a value 1 \, creating an impulse of the length n.
+n is determined by the parameter "length" and is set via creation argument
+or the second inlet;
+#X obj 512 429 hsd_library-meta;
+#X connect 4 0 6 0;
+#X connect 4 0 3 0;
+#X connect 6 0 7 0;
+#X connect 7 0 3 0;
+#X connect 8 0 6 1;
